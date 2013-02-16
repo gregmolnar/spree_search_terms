@@ -2,7 +2,7 @@ Spree::ProductsController.class_eval do
 	before_filter :search_term, :only => :show
 
 	def search_term
-		require 'URI'
+		require 'uri'
 		bots = {
 			'google.hu' => 'q',
 			'google.com' => 'q',
