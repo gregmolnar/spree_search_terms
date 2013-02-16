@@ -41,6 +41,7 @@ Spree::ProductsController.class_eval do
 		host = parsed.host.gsub(/^www\./, '')
 		query = (parsed.query.nil?) ? Rack::Utils.parse_nested_query(parsed.fragment) : Rack::Utils.parse_nested_query(parsed.query)
 		term = query[bots[host]]
+		return true if term.nil? or term.empty?
 		product = Spree::Product.active(current_currency).find_by_permalink!(params[:id])
 
 		t = Spree::SearchTerm.where('product_id = ? and term = ?', product.id, term).first
