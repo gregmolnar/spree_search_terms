@@ -1,0 +1,6 @@
+<div id="search_terms">
+	<h3><%= t('spree_search_terms.searched_like_this') %></h3>
+	<% @product.search_terms.each do |t| %>
+		<div><%= link_to t.term, @product  %></div>
+	<% end %>
+</div>
