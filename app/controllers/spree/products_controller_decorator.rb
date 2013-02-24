@@ -37,7 +37,11 @@ Spree::ProductsController.class_eval do
 			'baidu.com' => 'wd',			
 			'mamma.com' => 'query'
 		}
-		parsed = URI::parse(request.referer)
+		begin
+			parsed = URI::parse(request.referer)
+		rescue
+			return true
+		end
 		host = parsed.host.gsub(/^www\./, '')
 		query = (parsed.query.nil?) ? Rack::Utils.parse_nested_query(parsed.fragment) : Rack::Utils.parse_nested_query(parsed.query)
 		term = query[bots[host]]
